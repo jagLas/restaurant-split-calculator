@@ -1,6 +1,7 @@
-import React, { useId, useState } from "react"
-import { Inventory } from "../classes";
+import React, { useId, useMemo, useState } from "react"
+import { Inventory, Item } from "../classes";
 import InventoryList from "./InventoryList";
+import Summary from "./Summary";
 
 export default function InventoryComp () {
     const id = useId()
@@ -15,9 +16,25 @@ export default function InventoryComp () {
 
     }
 
+    const totals = useMemo(() => {
+        const totals: {[index:string] : number} = {preTaxTipTotal: 0}
+
+        inventory.items.forEach(item => {
+            if (item.person in totals) {
+                totals[item.person] += item.price;
+            } else {
+                totals[item.person] = item.price;
+            }
+
+            totals.preTaxTipTotal += item.price;
+        })
+
+        return totals
+    }, [inventory])
+
     return (
         <>
-            <InventoryList inventory={inventory} setInventory={setInventory} />
+            <Summary totals={totals} inventory={inventory}/>
             <form>
                 <label>
                     Person
@@ -43,8 +60,9 @@ export default function InventoryComp () {
                         onChange={(e) => setPrice(Number(e.target.value))}
                     />
                 </label>
-                <button onClick={handleClick}>Add Person</button>
+                <button onClick={handleClick}>Add Item</button>
             </form>
+            <InventoryList inventory={inventory} setInventory={setInventory} />
         </>
     )
 }

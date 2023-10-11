@@ -1,0 +1,12 @@
+#summary-table {
+    margin: 0px auto;
+    width: fit-content;
+    display: grid;
+    column-gap: 32px;
+    row-gap: 4px;
+    grid-template-columns: repeat(4, auto);
+}
+
+#summary-table>li {
+    display: contents;
+}

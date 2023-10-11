@@ -7,7 +7,7 @@ export class Item {
     price: number;
 
     constructor(person: string, name: string, price: number){
-        this.id = itemIdCounter++
+        this.id = itemIdCounter++;
         this.person = person;
         this.name = name;
         this.price = price;
@@ -52,6 +52,18 @@ export class Inventory {
                 return false
             } else {
                 return true
+            }
+        })
+
+        return new Inventory(this.items, this.tip)
+    }
+
+    editItem(editedItem: Item): Inventory {
+        this.items = this.items.map(item => {
+            if (item.id === editedItem.id) {
+                return editedItem
+            } else {
+                return item
             }
         })
 
