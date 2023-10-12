@@ -1,4 +1,4 @@
-#summary-table {
+.table {
     margin: 0px auto;
     width: fit-content;
     display: grid;
@@ -7,6 +7,11 @@
     grid-template-columns: repeat(4, auto);
 }
 
-#summary-table>li {
+.table-row {
     display: contents;
 }
+
+.table>li:first-child, .table>li:last-child{
+    font-weight: 600;
+}
+
