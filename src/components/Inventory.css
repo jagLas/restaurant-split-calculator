@@ -1,0 +1,17 @@
+.grid-form{
+    display: grid;
+    grid-template-columns: min-content min-content;
+    max-width: 800px;
+    justify-items: center;
+    align-items: center;
+}
+
+.grid-form.horizontal {
+    grid-auto-flow: column;
+    grid-template-columns: unset;
+    grid-template-rows: 1fr 1fr;
+}
+
+.grid-form>* {
+    margin: 8px 16px;
+}
