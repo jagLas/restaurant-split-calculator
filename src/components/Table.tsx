@@ -1,7 +1,10 @@
+import React from "react"
+import './Table.css'
+
 type TableProps = {
     header: object,
     keyOrder: string[],
-    data: object[],
+    data: {[index: string]: React.ReactElement}[],
     sortFn?: (a:any, b:any) => 1 | -1 | 0
 }
 
@@ -28,7 +31,10 @@ export default function Table({keyOrder, header, data, sortFn}: TableProps) {
     })
 
     return (
-        <ul className="table" style={{gridTemplateColumns: `repeat(${headerArray.length}, auto)`}}>
+        <ul className="table"
+            style={{
+                gridTemplateColumns: `repeat(${headerArray.length}, auto)`
+                }}>
 
             <li className="table-row header">
                 {headerArray.map((headerLabel : string, i : number)=>{
@@ -39,10 +45,7 @@ export default function Table({keyOrder, header, data, sortFn}: TableProps) {
             {dataArray.map((dataRow, i) => {
                 return (
                     <li key={i} className="table-row">
-                        {dataRow.map((datum, i) => {
-                            console.log(datum)
-                            return <div key={i}>{datum.toString()}</div>
-                        })}
+                        {dataRow}
                     </li>)
             })}
         </ul>

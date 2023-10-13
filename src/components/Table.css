@@ -11,7 +11,7 @@
     display: contents;
 }
 
-.table>li:first-child, .table>li:last-child{
+.table>li.header, .table>li.footer{
     font-weight: 600;
 }
 

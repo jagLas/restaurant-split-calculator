@@ -1,5 +1,4 @@
 import { Inventory } from '../classes';
-import './Summary.css'
 import Table from './Table';
 
 type SummaryProps = {
@@ -16,8 +15,6 @@ export default function Summary ({totals, inventory} : SummaryProps) {
         allocatedTax: number
     }
 
-    type StringPersons = {[index: string]: string}[]
-
     let persons: Persons[] = [];
     for (const [name, total] of Object.entries(totals)) {
 
@@ -28,33 +25,34 @@ export default function Summary ({totals, inventory} : SummaryProps) {
             allocatedTax: 0
         }
 
-        person.allocatedTax = (Math.round(inventory.tax * person.portion) / 100)
+        person.allocatedTax = (Math.round(inventory.tax * person.portion * 100) / 100)
         persons.push(person)
     }
 
-    const data : StringPersons = persons.map(person => {
-        const newObject : {[index: string]: string} = {
-            name: person.name,
-            total: '$' + person.total.toFixed(2),
-            portion: person.portion * 100 + '%',
-            allocatedTax: person.allocatedTax.toFixed(2)
+    // formats them into react elements for table JSX
+    const data = persons.map(person => {
+        return {
+            name: <div key={1}>{person.name}</div>,
+            total: <div key={2}>{'$' + person.total.toFixed(2)}</div>,
+            portion: <div key={3}>{(person.portion * 100).toFixed(0) + '%'}</div>,
+            allocatedTax: <div key={4}>{'$' + person.allocatedTax.toFixed(2)}</div>
         }
-
-        return newObject
     })
 
+    // sort function for data
     const sortFn = (a: any, b: any) => {
-        if (a.name === 'Total') {
+        if (a.name.props.children === 'Total') {
             return 1
-        } else if (b.name === 'Total') {
+        } else if (b.name.props.children === 'Total') {
             return -1
-        } else if (a.name < b.name) {
+        } else if (a.name.props.children < b.name.props.children) {
             return -1
         } else {
             return 1
         }
     }
 
+    // header labels
     const headers: object = {
         name: 'Name',
         total: 'Pre-Tax Total',
@@ -62,7 +60,8 @@ export default function Summary ({totals, inventory} : SummaryProps) {
         allocatedTax: 'Allocated Tax'
     }
 
-    const keyOrder = ['name', 'total', 'portion', 'allocatedTax']
+    // order of table columns
+    const keyOrder : string[] = ['name', 'total', 'portion', 'allocatedTax']
 
     return (
         <div>
