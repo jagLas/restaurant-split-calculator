@@ -1,9 +1,7 @@
 .table {
-    margin: 0px auto;
+    margin: 8px auto;
     width: fit-content;
     display: grid;
-    column-gap: 32px;
-    row-gap: 4px;
     grid-template-columns: repeat(4, auto);
 }
 
@@ -11,7 +9,19 @@
     display: contents;
 }
 
-.table>li.header, .table>li.footer{
-    font-weight: 600;
+.table-row * {
+    padding: 8px 12px;
 }
 
+.table-row.header *, .table-row.footer *{
+    font-weight: 600;
+    background-color: var(--main-color);
+}
+
+.table-row.data:nth-of-type(2n+1) *{
+    background-color: var(--secondary-color);
+}
+
+.table-row.data:nth-of-type(2n) *{
+   background-color: var(--tertiary-color);
+}

@@ -66,7 +66,7 @@ export default function Summary ({totals, inventory} : SummaryProps) {
     return (
         <div>
             <h1>Summary</h1>
-            <Table header={headers} data={data} keyOrder={keyOrder} sortFn={sortFn}/>
+            <Table header={headers} data={data} keyOrder={keyOrder} sortFn={sortFn} rgbValues={[56, 172, 35]} />
         </div>
     )
 }

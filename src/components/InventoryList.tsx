@@ -45,7 +45,7 @@ export default function InventoryList ({inventory, setInventory}: AppProps) {
     const keyOrder = ['person', 'name', 'price', 'removeItem']
     return (
         <div>
-            <Table keyOrder={keyOrder} header={headers} data={inventoryArray}/>
+            <Table rgbValues={[255, 66, 28]} keyOrder={keyOrder} header={headers} data={inventoryArray}/>
         </div>
     )
 }
