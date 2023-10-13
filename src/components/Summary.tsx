@@ -12,7 +12,9 @@ export default function Summary ({totals, inventory} : SummaryProps) {
         name: string,
         total: number,
         portion: number,
-        allocatedTax: number
+        allocatedTax: number,
+        allocatedTip: number,
+        finalPortion: number
     }
 
     let persons: Persons[] = [];
@@ -22,10 +24,17 @@ export default function Summary ({totals, inventory} : SummaryProps) {
             name: name === 'preTaxTipTotal' ? 'Total' : name,
             total: (Math.round(total * 100) / 100),
             portion: totals.preTaxTipTotal ? Math.round(total / totals.preTaxTipTotal * 100) / 100 : 0,
-            allocatedTax: 0
+            allocatedTax: 0,
+            allocatedTip: 0,
+            finalPortion: 0
         }
 
         person.allocatedTax = (Math.round(inventory.tax * person.portion * 100) / 100)
+        person.allocatedTip = (Math.round(inventory.tip * person.portion * 100) /100)
+        person.finalPortion = (Math.round(
+            (person.allocatedTax + person.allocatedTip + person.total) * 100
+        ) / 100)
+        console.log(person)
         persons.push(person)
     }
 
@@ -35,7 +44,9 @@ export default function Summary ({totals, inventory} : SummaryProps) {
             name: <div key={1}>{person.name}</div>,
             total: <div key={2}>{'$' + person.total.toFixed(2)}</div>,
             portion: <div key={3}>{(person.portion * 100).toFixed(0) + '%'}</div>,
-            allocatedTax: <div key={4}>{'$' + person.allocatedTax.toFixed(2)}</div>
+            allocatedTax: <div key={4}>{'$' + person.allocatedTax.toFixed(2)}</div>,
+            allocatedTip: <div key={5}>{'$' + person.allocatedTip.toFixed(2)}</div>,
+            finalPortion: <div key={6}>{'$' + person.finalPortion.toFixed(2)}</div>,
         }
     })
 
@@ -56,12 +67,14 @@ export default function Summary ({totals, inventory} : SummaryProps) {
     const headers: object = {
         name: 'Name',
         total: 'Pre-Tax Total',
-        portion: 'Portion of Bill',
-        allocatedTax: 'Allocated Tax'
+        portion: 'Portion of Bill (%)',
+        allocatedTax: 'Allocated Tax',
+        allocatedTip: 'Allocated Tip',
+        finalPortion: 'Portion of Bill ($)'
     }
 
     // order of table columns
-    const keyOrder : string[] = ['name', 'total', 'portion', 'allocatedTax']
+    const keyOrder : string[] = ['name', 'total', 'portion', 'allocatedTax', 'allocatedTip', 'finalPortion']
 
     return (
         <div>
