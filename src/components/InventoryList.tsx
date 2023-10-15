@@ -1,6 +1,5 @@
 import React from "react"
 import { Inventory } from "../classes"
-import Item from "./Item";
 import Table from "./Table";
 
 type AppProps = {
@@ -44,7 +43,7 @@ export default function InventoryList ({inventory, setInventory}: AppProps) {
 
     const keyOrder = ['person', 'name', 'price', 'removeItem']
     return (
-        <div>
+        <div id='item-list'>
             <Table rgbValues={[255, 66, 28]} keyOrder={keyOrder} header={headers} data={inventoryArray}/>
         </div>
     )

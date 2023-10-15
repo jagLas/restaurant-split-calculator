@@ -1,5 +1,6 @@
 import { Inventory } from '../classes';
 import Table from './Table';
+import './Summary.css'
 
 type SummaryProps = {
     totals : {[index: string]: number},
@@ -77,8 +78,8 @@ export default function Summary ({totals, inventory} : SummaryProps) {
     const keyOrder : string[] = ['name', 'total', 'portion', 'allocatedTax', 'allocatedTip', 'finalPortion']
 
     return (
-        <div>
-            <h1>Summary</h1>
+        <div id='summary-container'>
+            <h2>Summary</h2>
             <Table header={headers} data={data} keyOrder={keyOrder} sortFn={sortFn} rgbValues={[56, 172, 35]} />
         </div>
     )

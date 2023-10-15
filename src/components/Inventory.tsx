@@ -40,8 +40,7 @@ export default function InventoryComp () {
     }, [inventory])
 
     return (
-        <>
-            <Summary totals={totals} inventory={inventory}/>
+        <div id='app-container'>
             <form id='item-form' className="grid-form horizontal">
                 <label htmlFor="person-input">
                     Person
@@ -71,15 +70,16 @@ export default function InventoryComp () {
                 <div></div>
                 <button onClick={handleClick}>Add Item</button>
             </form>
-            <form id='tax-tip-form' className="grid-form">
-                {/* <label htmlFor='tax-input'>Tax</label>
-                <input id='tax-input' type='number' value={tax} onChange={(e) => {setTax(Number(e.target.value))}} /> */}
+            <form id='tax-tip-form' className="grid-form horizontal">
+                <label htmlFor='tax-input'>Tax</label>
+                <input id='tax-input' type='number' value={tax} onChange={(e) => {setTax(Number(e.target.value))}} />
                 <label htmlFor="tip-input">Tip</label>
                 <input id='tip-input' type='number' value={tip} onChange={(e) => {setTip(Number(e.target.value))}} />
                 <div></div>
+                <button onClick={updateHandler}>Update</button>
             </form>
-            <button onClick={updateHandler}>Update</button>
+            <Summary totals={totals} inventory={inventory}/>
             <InventoryList inventory={inventory} setInventory={setInventory} />
-        </>
+        </div>
     )
 }

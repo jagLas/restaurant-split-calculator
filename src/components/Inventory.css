@@ -4,6 +4,7 @@
     max-width: 800px;
     justify-items: center;
     align-items: center;
+    /* border: 1px solid black; */
 }
 
 .grid-form.horizontal {
@@ -13,5 +14,28 @@
 }
 
 .grid-form>* {
-    margin: 8px 16px;
+    margin: 0px 4px;
+}
+
+#app-container {
+    margin: 0px auto;
+    width: min-content;
+    display: grid;
+    grid-template-columns: max-content min-content;
+    grid-template-rows: fit-content fit-content fit-content fit-content;
+    grid-template-areas: 'tax-tip-form item-list' 'item-form item-list' 'summary item-list' '. item-list';
+}
+
+#item-form {
+    grid-area: item-form;
+}
+
+#tax-tip-form {
+    grid-area: tax-tip-form;
+}
+
+#item-list {
+    grid-area: item-list;
+    justify-content: flex-start;
+    margin: 8px;
 }
