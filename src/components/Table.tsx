@@ -43,7 +43,7 @@ export default function Table({keyOrder, header, data, sortFn, rgbValues}: Table
     return (
         <ul className="table"
             style={{
-                gridTemplateColumns: `repeat(${headerArray.length}, auto)`,
+                gridTemplateColumns: `repeat(${headerArray.length}, fit-content(25%))`,
                 ['--main-color' as any]: rgbStringDark,
                 ['--secondary-color' as any]: rgbStringLight,
                 ['--tertiary-color' as any]: rgbStringLightest,
