@@ -19,7 +19,7 @@ export class Inventory {
     tax: number;
     tip: number;
 
-    constructor(items: Item[], tip: number) {
+    constructor(items: Item[], tip: number, tax: number) {
         if (items) {
             this.items = [...items]
         } else {
@@ -32,18 +32,18 @@ export class Inventory {
             this.tip = 0;
         }
 
-        this.tax = this.items.reduce((accumulator, currentVal) => {
-            return accumulator + currentVal.price
-        }, 0) * .08
-
-        this.tax = Math.round(this.tax * 100) / 100
+        if (typeof tax === 'number') {
+            this.tax = tax;
+        } else {
+            this.tax = 0;
+        }
     }
 
     addItem(person: string, item: string, price: number): Inventory {
         const newItem = new Item(person, item, price)
         this.items.push(newItem)
 
-        return new Inventory(this.items, this.tip)
+        return new Inventory(this.items, this.tip, this.tax)
     }
 
     removeItem(removedItem: Item): Inventory {
@@ -55,7 +55,7 @@ export class Inventory {
             }
         })
 
-        return new Inventory(this.items, this.tip)
+        return new Inventory(this.items, this.tip, this.tax)
     }
 
     editItem(editedItem: Item): Inventory {
@@ -67,6 +67,6 @@ export class Inventory {
             }
         })
 
-        return new Inventory(this.items, this.tip)
+        return new Inventory(this.items, this.tip, this.tax)
     }
 }

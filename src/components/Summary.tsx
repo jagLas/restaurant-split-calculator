@@ -24,7 +24,7 @@ export default function Summary ({totals, inventory} : SummaryProps) {
         let person: Persons = {
             name: name === 'preTaxTipTotal' ? 'Total' : name,
             total: (Math.round(total * 100) / 100),
-            portion: totals.preTaxTipTotal ? Math.round(total / totals.preTaxTipTotal * 100) / 100 : 0,
+            portion: totals.preTaxTipTotal ? total / totals.preTaxTipTotal  : 0,
             allocatedTax: 0,
             allocatedTip: 0,
             finalPortion: 0
@@ -44,7 +44,7 @@ export default function Summary ({totals, inventory} : SummaryProps) {
         return {
             name: <div key={1}>{person.name}</div>,
             total: <div key={2}>{'$' + person.total.toFixed(2)}</div>,
-            portion: <div key={3}>{(person.portion * 100).toFixed(0) + '%'}</div>,
+            portion: <div key={3}>{(person.portion * 100).toFixed(1) + '%'}</div>,
             allocatedTax: <div key={4}>{'$' + person.allocatedTax.toFixed(2)}</div>,
             allocatedTip: <div key={5}>{'$' + person.allocatedTip.toFixed(2)}</div>,
             finalPortion: <div key={6}>{'$' + person.finalPortion.toFixed(2)}</div>,

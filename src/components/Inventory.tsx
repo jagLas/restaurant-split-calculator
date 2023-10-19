@@ -6,7 +6,7 @@ import './Inventory.css'
 
 export default function InventoryComp () {
     const id = useId()
-    const [inventory, setInventory] = useState<Inventory>(new Inventory([], 0))
+    const [inventory, setInventory] = useState<Inventory>(new Inventory([], 0, 0))
     const [person, setPerson] = useState('');
     const [item, setItem] = useState('');
     const [price, setPrice] = useState<number>(0)
@@ -20,7 +20,7 @@ export default function InventoryComp () {
 
     const updateHandler = (e : React.BaseSyntheticEvent) => {
         e.preventDefault()
-        setInventory(new Inventory(inventory.items, tip))
+        setInventory(new Inventory(inventory.items, tip, tax))
     }
 
     const totals = useMemo(() => {

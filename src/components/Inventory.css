@@ -37,5 +37,4 @@
 #item-list {
     grid-area: item-list;
     justify-content: flex-start;
-    margin: 8px;
 }
